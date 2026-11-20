@@ -12,13 +12,18 @@
 
 ## 프로젝트 개요
 
-| 항목 | 내용 |
-| --- | --- |
-| 기간 | 2026.07.06 ~ 2026.08.10 (5주) |
-| 팀 | 6명 (백엔드 3, 프론트 1, 기획 1, AI 평가 1) |
-| 담당 | 채팅, 알림, 활동 상태(Presence), WebSocket(STOMP) 실시간 인프라 |
-| 수상 | SSAFY 프로젝트 우수상 |
-| 기술 | Java 25, Spring Boot 4.1, MySQL 8.4, Redis 8.2, RabbitMQ, WebSocket(STOMP), Flyway, Testcontainers |
+<table>
+<thead>
+<tr><th nowrap>항목</th><th nowrap>내용</th></tr>
+</thead>
+<tbody>
+<tr><td nowrap>기간</td><td>2026.07.06 ~ 2026.08.10 (5주)</td></tr>
+<tr><td nowrap>팀</td><td>6명 (백엔드 3, 프론트 1, 기획 1, AI 평가 1)</td></tr>
+<tr><td nowrap>담당</td><td>채팅, 알림, 활동 상태(Presence), WebSocket(STOMP) 실시간 인프라</td></tr>
+<tr><td nowrap>수상</td><td nowrap>SSAFY 프로젝트 우수상</td></tr>
+<tr><td nowrap>기술</td><td>Java 25, Spring Boot 4.1, MySQL 8.4, Redis 8.2, RabbitMQ, WebSocket(STOMP), Flyway, Testcontainers</td></tr>
+</tbody>
+</table>
 
 ## 내가 한 일
 
@@ -41,13 +46,18 @@
 
 ## 핵심 성과
 
-| 개선 | 지표 | 전 | 후 |
-| --- | --- | --- | --- |
-| 알림 실시간 전달 | 멘션 2회 뒤 실시간 알림 프레임 | 0건 | 매번 발행 |
-| 메시지 조회 배치화 | 페이지당 추가 조회 (메시지 N개, 파일 카드 F개) | 2N+F회 | 최대 3회 |
-| 채팅방 목록 조회 (프로젝트 후) | 방 100개, 실제 MySQL | SELECT 101회, 140ms | 2회, 7.5ms |
-| 로그아웃 상태 반영 | OFFLINE으로 바뀌기까지 | 최대 100초 | 즉시 |
-| 회의 요약 저장 | 요약 생성 | 0건, 작업 멈춤 | 정상 저장, 알림 도착 |
+<table>
+<thead>
+<tr><th nowrap>개선</th><th nowrap>지표</th><th nowrap>전</th><th nowrap>후</th></tr>
+</thead>
+<tbody>
+<tr><td nowrap>알림 실시간 전달</td><td>멘션 2회 뒤 실시간 알림 프레임</td><td nowrap>0건</td><td nowrap>매번 발행</td></tr>
+<tr><td nowrap>메시지 조회 배치화</td><td>페이지당 추가 조회 (메시지 N개, 파일 카드 F개)</td><td nowrap>2N+F회</td><td nowrap>최대 3회</td></tr>
+<tr><td nowrap>채팅방 목록 조회<br>(프로젝트 후)</td><td>방 100개, 실제 MySQL</td><td nowrap>SELECT 101회, 140ms</td><td nowrap>2회, 7.5ms</td></tr>
+<tr><td nowrap>로그아웃 상태 반영</td><td>OFFLINE으로 바뀌기까지</td><td nowrap>최대 100초</td><td nowrap>즉시</td></tr>
+<tr><td nowrap>회의 요약 저장</td><td nowrap>요약 생성</td><td nowrap>0건, 작업 멈춤</td><td nowrap>정상 저장, 알림 도착</td></tr>
+</tbody>
+</table>
 
 운영 로그, 브라우저 WebSocket 캡처, 쿼리 수로 확인했고, 채팅방 목록만 프로젝트가 끝난 뒤 실제 MySQL로 시간을 쟀습니다.
 
@@ -101,13 +111,18 @@
 
 ## 기술 선택 이유
 
-| 선택 | 이유 |
-| --- | --- |
-| STOMP 신호 + REST 재조회 | 신호를 놓쳐도 마지막 순번 이후만 다시 받으면 되게, 데이터는 REST 한 경로로만 가져오려고 |
-| 채팅방 행 잠금으로 순번 매기기 | 동시에 보낸 메시지도 방 안에서 순서가 하나로 정해지게 하려고 |
-| JdbcTemplate | 락, 조건부 UPDATE, 선점, 커서 쿼리가 많아 SQL을 직접 다루는 편이 명확해서 (결정 문서로 남김) |
-| Redis TTL 기반 Presence | 여러 탭의 접속 신호를 만료 시간으로 묶어, 끊긴 탭은 자연스럽게 빠지게 하려고 |
-| 파일 권한은 캐시하지 않음 | 무효화에 실패하면 권한 없는 사람에게 파일이 보일 수 있어서 |
+<table>
+<thead>
+<tr><th nowrap>선택</th><th nowrap>이유</th></tr>
+</thead>
+<tbody>
+<tr><td nowrap>STOMP 신호 + REST 재조회</td><td>신호를 놓쳐도 마지막 순번 이후만 다시 받으면 되게, 데이터는 REST 한 경로로만 가져오려고</td></tr>
+<tr><td nowrap>채팅방 행 잠금으로 순번 매기기</td><td>동시에 보낸 메시지도 방 안에서 순서가 하나로 정해지게 하려고</td></tr>
+<tr><td nowrap>JdbcTemplate</td><td>락, 조건부 UPDATE, 선점, 커서 쿼리가 많아 SQL을 직접 다루는 편이 명확해서 (결정 문서로 남김)</td></tr>
+<tr><td nowrap>Redis TTL 기반 Presence</td><td>여러 탭의 접속 신호를 만료 시간으로 묶어, 끊긴 탭은 자연스럽게 빠지게 하려고</td></tr>
+<tr><td nowrap>파일 권한은 캐시하지 않음</td><td>무효화에 실패하면 권한 없는 사람에게 파일이 보일 수 있어서</td></tr>
+</tbody>
+</table>
 
 ## 검토와 제안
 
